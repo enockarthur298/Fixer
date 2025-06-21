@@ -593,3 +593,8 @@ language_code
 2025-06-21 23:39:10 | INFO     | __main__:main:61 - Starting in CLI mode
 2025-06-21 23:39:26 | INFO     | handlers.gemini_handler:init_gemini:30 - Gemini API initialized successfully
 2025-06-21 23:39:38 | INFO     | handlers.gemini_handler:process_text:71 - Successfully processed text input
+2025-06-21 23:44:11 | INFO     | utils.logger:setup_logger:69 - Logger initialized with level INFO, logging to logs/fixer_ai.log
+2025-06-21 23:45:53 | INFO     | utils.logger:setup_logger:69 - Logger initialized with level INFO, logging to logs/fixer_ai.log
+2025-06-21 23:46:17 | INFO     | utils.logger:setup_logger:69 - Logger initialized with level INFO, logging to logs/fixer_ai.log
+2025-06-21 23:46:17 | INFO     | __main__:main:53 - Starting Fixer AI Repair Agent
+2025-06-21 23:46:17 | INFO     | __main__:main:61 - Starting in CLI mode
