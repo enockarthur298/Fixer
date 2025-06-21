@@ -1,0 +1,32 @@
+# Core dependencies
+fastapi
+uvicorn
+python-dotenv
+pydantic
+python-multipart
+
+# Gemini AI
+google-generativeai
+websockets
+
+# Voice processing
+SpeechRecognition
+pyaudio
+pyttsx3
+gTTS
+
+# Image processing
+opencv-python
+pillow
+mss  # For screen capture
+
+# SMS handling
+twilio
+
+# Utilities
+loguru
+typer
+rich
+
+# Script execution
+psutil
