@@ -30,3 +30,6 @@ rich
 
 # Script execution
 psutil
+
+# Packaging
+pyinstaller
