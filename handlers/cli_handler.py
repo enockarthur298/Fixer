@@ -11,6 +11,7 @@ import sys
 import time
 import platform
 from typing import Dict, Any, Optional, List
+import json
 
 from rich.console import Console
 from rich.panel import Panel
@@ -18,6 +19,7 @@ from rich.markdown import Markdown
 from rich.prompt import Prompt, Confirm
 
 from utils import logger
+from utils.basic_tech_api import basic_tech_client
 from handlers import gemini_handler, vision_handler
 from core import script_runner
 
@@ -126,6 +128,18 @@ def run() -> None:
         # Store the last script for potential execution
         last_script = ""
         
+        # Get or set a user ID for context storage (in a real app, this would be tied to user auth)
+        user_id = os.environ.get('FIXER_USER_ID', 'default_user')
+        console.print(f"[bold blue]User ID: {user_id} - Loading user context...[/bold blue]")
+        
+        # Load user context if available
+        user_context = basic_tech_client.get_user_context(user_id)
+        if user_context:
+            console.print(f"[bold green]Loaded user context with {len(user_context.get('interactions', []))} previous interactions.[/bold green]")
+        else:
+            console.print(f"[bold yellow]No user context loaded. API key may not be set.[/bold yellow]")
+            user_context = {}
+        
         # Main interaction loop
         while True:
             # Get user input
@@ -140,19 +154,37 @@ def run() -> None:
                 # Capture and analyze screenshot
                 console.print("[bold blue]Please describe what I should look for in the screenshot:[/bold blue]")
                 description = Prompt.ask("[bold green]Description[/bold green]")
+                # Add context to the request
+                if user_context:
+                    description = f"Previous context: {json.dumps(user_context)}\nCurrent request: {description}"
                 result = process_command(description, capture_image=True, use_webcam=False)
                 display_result(result)
                 if result.get("script"):
                     last_script = result["script"]
+                # Save interaction to user context
+                basic_tech_client.add_interaction_to_context(user_id, {
+                    'timestamp': time.time(),
+                    'request': description,
+                    'response': result
+                })
             
             elif user_input.lower() == "!webcam":
                 # Capture and analyze webcam image
                 console.print("[bold blue]Please describe what I should look for in the webcam image:[/bold blue]")
                 description = Prompt.ask("[bold green]Description[/bold green]")
+                # Add context to the request
+                if user_context:
+                    description = f"Previous context: {json.dumps(user_context)}\nCurrent request: {description}"
                 result = process_command(description, capture_image=True, use_webcam=True)
                 display_result(result)
                 if result.get("script"):
                     last_script = result["script"]
+                # Save interaction to user context
+                basic_tech_client.add_interaction_to_context(user_id, {
+                    'timestamp': time.time(),
+                    'request': description,
+                    'response': result
+                })
             
             elif user_input.lower() == "!run":
                 # Execute the last script
@@ -174,13 +206,23 @@ def run() -> None:
                 # Confirm before running with script type information
                 if Confirm.ask(f"[bold red]Are you sure you want to run this {script_type} script?[/bold red]"):
                     with console.status("[bold green]Running script..."):
-                        output = script_runner.run_script(last_script)
+                        output, retry_type = script_runner.run_script(last_script, script_type.lower())
                     
                     console.print(Panel(
                         output,
                         title="Script Execution Result",
                         border_style="blue"
                     ))
+                    
+                    # If there's a suggested retry type and the execution failed, ask to retry
+                    if retry_type and "Error" in output and Confirm.ask(f"[bold yellow]Script failed. Retry as {retry_type.capitalize()} script?[/bold yellow]"):
+                        with console.status("[bold green]Retrying script with corrected type..."):
+                            output, _ = script_runner.run_script(last_script, retry_type)
+                        console.print(Panel(
+                            output,
+                            title="Retry Script Execution Result",
+                            border_style="blue"
+                        ))
             
             else:
                 # For normal text input, check if it's a technical issue and offer image capture
@@ -194,18 +236,33 @@ def run() -> None:
                         
                         # Capture the image
                         with console.status("[bold green]Capturing image..."):
+                            # Add context to the request
+                            if user_context:
+                                user_input = f"Previous context: {json.dumps(user_context)}\nCurrent request: {user_input}"
                             result = process_command(user_input, capture_image=True, use_webcam=use_webcam)
                     else:
                         # Process without image
+                        # Add context to the request
+                        if user_context:
+                            user_input = f"Previous context: {json.dumps(user_context)}\nCurrent request: {user_input}"
                         result = process_command(user_input)
                 else:
                     # Process normal text input without image prompt
+                    # Add context to the request
+                    if user_context:
+                        user_input = f"Previous context: {json.dumps(user_context)}\nCurrent request: {user_input}"
                     result = process_command(user_input)
                 
                 # Display result and store script
                 display_result(result)
                 if result.get("script"):
                     last_script = result["script"]
+                # Save interaction to user context
+                basic_tech_client.add_interaction_to_context(user_id, {
+                    'timestamp': time.time(),
+                    'request': user_input,
+                    'response': result
+                })
     
     except KeyboardInterrupt:
         console.print("\n[bold blue]CLI interface terminated.[/bold blue]")

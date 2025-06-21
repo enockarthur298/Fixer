@@ -100,38 +100,48 @@ def save_script_to_file(script: str, script_type: str = "powershell") -> Optiona
         log.error(f"Error saving script to file: {e}")
         return None
 
-def run_script(script: str) -> str:
+def run_script(script: str, script_type: str = None) -> Tuple[str, Optional[str]]:
     """Run a repair script safely.
     
     Args:
         script: The script content to run
-        
+        script_type: Optional forced script type (powershell, batch, bash)
+    
     Returns:
-        Output from the script execution
+        Tuple of (output from the script execution, suggested retry type if error)
     """
     try:
         # Check if the script is dangerous
         is_dangerous, reason = is_dangerous_script(script)
         if is_dangerous:
             log.warning(f"Dangerous script detected: {reason}")
-            return f"Error: Cannot execute script. {reason}"
+            return f"Error: Cannot execute script. {reason}", None
         
         # Determine the script type and save it to a file
         os_type = platform.system().lower()
-        if os_type == "windows":
-            # Check if it's a PowerShell script
-            if "function" in script or "param(" in script or "$" in script:
-                script_path = save_script_to_file(script, "powershell")
-                command = ["powershell", "-ExecutionPolicy", "Bypass", "-File", script_path]
+        if script_type is None:
+            if os_type == "windows":
+                # Check if it's a PowerShell script
+                if "function" in script or "param(" in script or "$" in script:
+                    script_path = save_script_to_file(script, "powershell")
+                    command = ["powershell", "-ExecutionPolicy", "Bypass", "-File", script_path]
+                else:
+                    script_path = save_script_to_file(script, "batch")
+                    command = ["cmd", "/c", script_path]
             else:
-                script_path = save_script_to_file(script, "batch")
-                command = ["cmd", "/c", script_path]
+                script_path = save_script_to_file(script, "bash")
+                command = ["bash", script_path]
         else:
-            script_path = save_script_to_file(script, "bash")
-            command = ["bash", script_path]
+            script_path = save_script_to_file(script, script_type)
+            if script_type == "powershell":
+                command = ["powershell", "-ExecutionPolicy", "Bypass", "-File", script_path]
+            elif script_type == "batch":
+                command = ["cmd", "/c", script_path]
+            else:
+                command = ["bash", script_path]
         
         if not script_path:
-            return "Error: Failed to save script to file"
+            return "Error: Failed to save script to file", None
         
         # Execute the script with resource limits
         log.info(f"Executing script: {script_path}")
@@ -153,23 +163,30 @@ def run_script(script: str) -> str:
             # Check return code
             if process.returncode != 0:
                 log.warning(f"Script execution failed with return code {process.returncode}")
-                return f"Error (code {process.returncode}):\n{stderr}\n\nOutput:\n{stdout}"
+                error_msg = f"Error (code {process.returncode}):\n{stderr}\n\nOutput:\n{stdout}"
+                # Check if this looks like a script type mismatch
+                if os_type == "windows" and ".ps1" in script_path and ("@echo" in stderr or "Unexpected token 'off'" in stderr):
+                    error_msg += "\n\nPossible script type mismatch: This appears to be a Batch script saved as PowerShell. Retry with correct type."
+                    return error_msg, "batch"
+                elif os_type == "windows" and ".bat" in script_path and ("command not recognized" in stderr or "not recognized as an internal or external command" in stderr):
+                    error_msg += "\n\nPossible script type mismatch: This appears to be a PowerShell script saved as Batch. Retry with correct type."
+                    return error_msg, "powershell"
+                return error_msg, None
             
             log.info("Script executed successfully")
-            return f"Success! Output:\n{stdout}"
-        
+            return f"Success! Output:\n{stdout}", None
         except subprocess.TimeoutExpired:
             # Kill the process if it times out
             process.kill()
             log.warning("Script execution timed out")
-            return "Error: Script execution timed out (5 minutes)"
+            return "Error: Script execution timed out (5 minutes)", None
         finally:
             # Clean up old scripts after execution
             cleanup_old_scripts()
     
     except Exception as e:
         log.error(f"Error running script: {e}")
-        return f"Error: {str(e)}"
+        return f"Error: {str(e)}", None
 
 def cleanup_old_scripts(max_age_hours: int = 24) -> None:
     """Clean up old script files from the temp directory.

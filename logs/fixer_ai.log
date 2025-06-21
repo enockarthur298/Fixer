@@ -484,3 +484,24 @@ language_code
 2025-06-21 22:11:58 | INFO     | core.script_runner:save_script_to_file:96 - Script saved to C:\Users\PC\AppData\Local\Temp\fixer_ai\repair_script_1750540318.bat
 2025-06-21 22:11:58 | INFO     | core.script_runner:run_script:137 - Executing script: C:\Users\PC\AppData\Local\Temp\fixer_ai\repair_script_1750540318.bat
 2025-06-21 22:12:00 | INFO     | core.script_runner:run_script:158 - Script executed successfully
+2025-06-21 22:18:07 | INFO     | utils.logger:setup_logger:69 - Logger initialized with level INFO, logging to logs/fixer_ai.log
+2025-06-21 22:18:11 | INFO     | utils.logger:setup_logger:69 - Logger initialized with level INFO, logging to logs/fixer_ai.log
+2025-06-21 22:18:11 | INFO     | __main__:main:53 - Starting Fixer AI Repair Agent
+2025-06-21 22:18:11 | INFO     | __main__:main:61 - Starting in CLI mode
+2025-06-21 22:18:38 | INFO     | handlers.gemini_handler:init_gemini:30 - Gemini API initialized successfully
+2025-06-21 22:18:45 | INFO     | handlers.gemini_handler:process_text:71 - Successfully processed text input
+2025-06-21 22:18:56 | INFO     | core.script_runner:save_script_to_file:96 - Script saved to C:\Users\PC\AppData\Local\Temp\fixer_ai\repair_script_1750540736.ps1
+2025-06-21 22:18:56 | INFO     | core.script_runner:run_script:137 - Executing script: C:\Users\PC\AppData\Local\Temp\fixer_ai\repair_script_1750540736.ps1
+2025-06-21 22:18:59 | WARNING  | core.script_runner:run_script:155 - Script execution failed with return code 1
+2025-06-21 22:19:22 | INFO     | handlers.gemini_handler:init_gemini:30 - Gemini API initialized successfully
+2025-06-21 22:19:27 | INFO     | handlers.gemini_handler:process_text:71 - Successfully processed text input
+2025-06-21 22:21:24 | INFO     | utils.logger:setup_logger:69 - Logger initialized with level INFO, logging to logs/fixer_ai.log
+2025-06-21 22:21:28 | INFO     | utils.logger:setup_logger:69 - Logger initialized with level INFO, logging to logs/fixer_ai.log
+2025-06-21 22:21:28 | INFO     | __main__:main:53 - Starting Fixer AI Repair Agent
+2025-06-21 22:21:28 | INFO     | __main__:main:61 - Starting in CLI mode
+2025-06-21 22:21:45 | INFO     | handlers.gemini_handler:init_gemini:30 - Gemini API initialized successfully
+2025-06-21 22:21:56 | INFO     | handlers.gemini_handler:process_text:71 - Successfully processed text input
+2025-06-21 22:22:09 | INFO     | core.script_runner:save_script_to_file:96 - Script saved to C:\Users\PC\AppData\Local\Temp\fixer_ai\repair_script_1750540929.bat
+2025-06-21 22:22:09 | INFO     | core.script_runner:run_script:147 - Executing script: C:\Users\PC\AppData\Local\Temp\fixer_ai\repair_script_1750540929.bat
+2025-06-21 22:23:55 | WARNING  | core.script_runner:run_script:165 - Script execution failed with return code 1
+2025-06-21 22:24:18 | INFO     | __main__:main:88 - Shutting down Fixer AI Repair Agent
