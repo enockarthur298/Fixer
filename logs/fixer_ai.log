@@ -540,3 +540,45 @@ language_code
 2025-06-21 22:57:51 | INFO     | __main__:main:61 - Starting in CLI mode
 2025-06-21 22:57:52 | ERROR    | utils.basic_tech_api:_make_request:47 - Error making request to Basic Tech API: 500 Server Error: Internal Server Error for url: https://api.basic.tech/project/c93871ce-bd0a-4678-bc21-00ed989c8c65/user/did:tmp:6673b487aa82727924a89f44/db/user_context
 2025-06-21 22:57:52 | INFO     | utils.basic_tech_api:get_user_context:64 - No user context found for user did:tmp:6673b487aa82727924a89f44 or table doesn't exist.
+2025-06-21 23:11:51 | INFO     | utils.logger:setup_logger:69 - Logger initialized with level INFO, logging to logs/fixer_ai.log
+2025-06-21 23:11:51 | ERROR    | utils.basic_tech_api:_make_request:48 - Basic Tech API server error (500) - Table 'user_context' may not exist in project
+2025-06-21 23:11:51 | INFO     | utils.basic_tech_api:_make_request:49 - Please create the 'user_context' table in your Basic Tech project at https://app.basic.tech
+2025-06-21 23:11:51 | INFO     | utils.basic_tech_api:get_user_context:73 - No user context found for user did:tmp:6673b487aa82727924a89f44. Table 'user_context' may not exist.
+2025-06-21 23:11:52 | ERROR    | utils.basic_tech_api:_make_request:48 - Basic Tech API server error (500) - Table 'user_context' may not exist in project
+2025-06-21 23:11:52 | INFO     | utils.basic_tech_api:_make_request:49 - Please create the 'user_context' table in your Basic Tech project at https://app.basic.tech
+2025-06-21 23:11:52 | WARNING  | utils.basic_tech_api:update_user_context:88 - Failed to update user context. Table 'user_context' may not exist in Basic Tech project.
+2025-06-21 23:15:07 | INFO     | utils.logger:setup_logger:69 - Logger initialized with level INFO, logging to logs/fixer_ai.log
+2025-06-21 23:15:07 | ERROR    | utils.basic_tech_api:_make_request:48 - Basic Tech API server error (500) - Table 'user_context' may not exist in project
+2025-06-21 23:15:07 | INFO     | utils.basic_tech_api:_make_request:49 - Please create the 'user_context' table in your Basic Tech project at https://app.basic.tech
+2025-06-21 23:15:07 | INFO     | utils.basic_tech_api:get_user_context:73 - No user context found for user did:tmp:6673b487aa82727924a89f44. Table 'user_context' may not exist.
+2025-06-21 23:15:08 | ERROR    | utils.basic_tech_api:_make_request:48 - Basic Tech API server error (500) - Table 'user_context' may not exist in project
+2025-06-21 23:15:08 | INFO     | utils.basic_tech_api:_make_request:49 - Please create the 'user_context' table in your Basic Tech project at https://app.basic.tech
+2025-06-21 23:15:08 | WARNING  | utils.basic_tech_api:update_user_context:88 - Failed to update user context. Table 'user_context' may not exist in Basic Tech project.
+2025-06-21 23:15:20 | INFO     | utils.logger:setup_logger:69 - Logger initialized with level INFO, logging to logs/fixer_ai.log
+2025-06-21 23:15:37 | INFO     | utils.logger:setup_logger:69 - Logger initialized with level INFO, logging to logs/fixer_ai.log
+2025-06-21 23:15:56 | INFO     | utils.logger:setup_logger:69 - Logger initialized with level INFO, logging to logs/fixer_ai.log
+2025-06-21 23:15:56 | INFO     | __main__:main:53 - Starting Fixer AI Repair Agent
+2025-06-21 23:15:56 | INFO     | __main__:main:61 - Starting in CLI mode
+2025-06-21 23:15:57 | ERROR    | utils.basic_tech_api:_make_request:48 - Basic Tech API server error (500) - Table 'user_context' may not exist in project
+2025-06-21 23:15:57 | INFO     | utils.basic_tech_api:_make_request:49 - Please create the 'user_context' table in your Basic Tech project at https://app.basic.tech
+2025-06-21 23:15:57 | INFO     | utils.basic_tech_api:get_user_context:73 - No user context found for user did:tmp:6673b487aa82727924a89f44. Table 'user_context' may not exist.
+2025-06-21 23:18:23 | INFO     | utils.logger:setup_logger:69 - Logger initialized with level INFO, logging to logs/fixer_ai.log
+2025-06-21 23:18:23 | INFO     | utils.basic_tech_api:_make_request:44 - Making GET request to https://api.basic.tech/project/c93871ce-bd0a-4678-bc21-00ed989c8c65/user/did:tmp:6673b487aa82727924a89f44/db/user_context
+2025-06-21 23:18:24 | ERROR    | utils.basic_tech_api:_make_request:50 - Basic Tech API server error (500) - Table 'user_context' may not exist in project
+2025-06-21 23:18:24 | INFO     | utils.basic_tech_api:_make_request:51 - Please create the 'user_context' table in your Basic Tech project at https://app.basic.tech
+2025-06-21 23:18:24 | INFO     | utils.basic_tech_api:_make_request:52 - Response content: {"error":"Internal Server Error","message":"Cannot read properties of undefined (reading 'owner')"}
+2025-06-21 23:18:24 | INFO     | utils.basic_tech_api:get_user_context:77 - No user context found for user did:tmp:6673b487aa82727924a89f44. Table 'user_context' may not exist.
+2025-06-21 23:18:24 | INFO     | utils.basic_tech_api:_make_request:44 - Making POST request to https://api.basic.tech/project/c93871ce-bd0a-4678-bc21-00ed989c8c65/user/did:tmp:6673b487aa82727924a89f44/db/user_context
+2025-06-21 23:18:25 | ERROR    | utils.basic_tech_api:_make_request:50 - Basic Tech API server error (500) - Table 'user_context' may not exist in project
+2025-06-21 23:18:25 | INFO     | utils.basic_tech_api:_make_request:51 - Please create the 'user_context' table in your Basic Tech project at https://app.basic.tech
+2025-06-21 23:18:25 | INFO     | utils.basic_tech_api:_make_request:52 - Response content: {"error":"Internal Server Error","message":"Cannot read properties of undefined (reading 'owner')"}
+2025-06-21 23:18:25 | WARNING  | utils.basic_tech_api:update_user_context:102 - Failed to update user context. Table 'user_context' may not exist in Basic Tech project.
+2025-06-21 23:18:25 | INFO     | utils.basic_tech_api:_make_request:44 - Making POST request to https://api.basic.tech/project/c93871ce-bd0a-4678-bc21-00ed989c8c65/user/did:tmp:6673b487aa82727924a89f44/db/user_context
+2025-06-21 23:18:26 | ERROR    | utils.basic_tech_api:_make_request:50 - Basic Tech API server error (500) - Table 'user_context' may not exist in project
+2025-06-21 23:18:26 | INFO     | utils.basic_tech_api:_make_request:51 - Please create the 'user_context' table in your Basic Tech project at https://app.basic.tech
+2025-06-21 23:18:26 | INFO     | utils.basic_tech_api:_make_request:52 - Response content: {"error":"Internal Server Error","message":"Cannot read properties of undefined (reading 'owner')"}
+2025-06-21 23:18:26 | WARNING  | utils.basic_tech_api:update_user_context:102 - Failed to update user context. Table 'user_context' may not exist in Basic Tech project.
+2025-06-21 23:24:18 | INFO     | utils.logger:setup_logger:69 - Logger initialized with level INFO, logging to logs/fixer_ai.log
+2025-06-21 23:24:24 | INFO     | utils.logger:setup_logger:69 - Logger initialized with level INFO, logging to logs/fixer_ai.log
+2025-06-21 23:24:24 | INFO     | __main__:main:53 - Starting Fixer AI Repair Agent
+2025-06-21 23:24:24 | INFO     | __main__:main:61 - Starting in CLI mode

@@ -129,16 +129,14 @@ def run() -> None:
         last_script = ""
         
         # Get or set a user ID for context storage (in a real app, this would be tied to user auth)
-        user_id = os.environ.get('FIXER_USER_ID', 'default_user')
-        console.print(f"[bold blue]User ID: {user_id} - Loading user context...[/bold blue]")
+        user_id = os.environ.get('FIXER_USER_ID', 'did:tmp:6673b487aa82727924a89f44')
         
-        # Load user context if available
+        # Silently load user context from Basic Tech if available
         user_context = basic_tech_client.get_user_context(user_id)
         if user_context:
-            console.print(f"[bold green]Loaded user context with {len(user_context.get('interactions', []))} previous interactions.[/bold green]")
+            console.print(f"[bold green]✅ Loaded user context with {len(user_context.get('interactions', []))} previous interactions.[/bold green]")
         else:
-            console.print(f"[bold yellow]No user context loaded. Basic Tech may not be properly configured.[/bold yellow]")
-            console.print(f"[dim]Continuing without personalized context...[/dim]")
+            # Don't show error messages, just initialize empty context
             user_context = {}
         
         # Main interaction loop
@@ -181,13 +179,14 @@ def run() -> None:
                 display_result(result)
                 if result.get("script"):
                     last_script = result["script"]
-                # Save interaction to user context
+                # Save interaction to user context (silently)
                 if basic_tech_client.api_key and basic_tech_client.project_id:
                     basic_tech_client.add_interaction_to_context(user_id, {
                         'timestamp': time.time(),
                         'request': description,
-                        'response': result
-                    })
+                        'response': result.get('response', ''),
+                        'script': result.get('script', '')
+                    }, silent=True)
             
             elif user_input.lower() == "!run":
                 # Execute the last script
@@ -254,13 +253,14 @@ def run() -> None:
                 display_result(result)
                 if result.get("script"):
                     last_script = result["script"]
-                # Save interaction to user context
+                # Save interaction to user context (silently)
                 if basic_tech_client.api_key and basic_tech_client.project_id:
                     basic_tech_client.add_interaction_to_context(user_id, {
                         'timestamp': time.time(),
                         'request': user_input,
-                        'response': result
-                    })
+                        'response': result.get('response', ''),
+                        'script': result.get('script', '')
+                    }, silent=True)
     
     except KeyboardInterrupt:
         console.print("\n[bold blue]CLI interface terminated.[/bold blue]")
