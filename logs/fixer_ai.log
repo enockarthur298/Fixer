@@ -505,3 +505,38 @@ language_code
 2025-06-21 22:22:09 | INFO     | core.script_runner:run_script:147 - Executing script: C:\Users\PC\AppData\Local\Temp\fixer_ai\repair_script_1750540929.bat
 2025-06-21 22:23:55 | WARNING  | core.script_runner:run_script:165 - Script execution failed with return code 1
 2025-06-21 22:24:18 | INFO     | __main__:main:88 - Shutting down Fixer AI Repair Agent
+2025-06-21 22:38:21 | INFO     | utils.logger:setup_logger:69 - Logger initialized with level INFO, logging to logs/fixer_ai.log
+2025-06-21 22:38:25 | INFO     | utils.logger:setup_logger:69 - Logger initialized with level INFO, logging to logs/fixer_ai.log
+2025-06-21 22:38:25 | INFO     | __main__:main:53 - Starting Fixer AI Repair Agent
+2025-06-21 22:38:25 | INFO     | __main__:main:61 - Starting in CLI mode
+2025-06-21 22:38:27 | ERROR    | utils.basic_tech_api:_make_request:45 - Error making request to Basic Tech API: 404 Client Error: Not Found for url: https://api.basic.tech/project/c93871ce-bd0a-4678-bc21-00ed989c8c65/user/default_user/data
+2025-06-21 22:41:28 | INFO     | utils.logger:setup_logger:69 - Logger initialized with level INFO, logging to logs/fixer_ai.log
+2025-06-21 22:41:31 | INFO     | utils.logger:setup_logger:69 - Logger initialized with level INFO, logging to logs/fixer_ai.log
+2025-06-21 22:41:31 | INFO     | __main__:main:53 - Starting Fixer AI Repair Agent
+2025-06-21 22:41:31 | INFO     | __main__:main:61 - Starting in CLI mode
+2025-06-21 22:41:33 | ERROR    | utils.basic_tech_api:_make_request:45 - Error making request to Basic Tech API: 404 Client Error: Not Found for url: https://api.basic.tech/project/c93871ce-bd0a-4678-bc21-00ed989c8c65/user/did:tmp:6673b487aa82727924a89f44/data
+2025-06-21 22:43:08 | INFO     | handlers.gemini_handler:init_gemini:30 - Gemini API initialized successfully
+2025-06-21 22:43:15 | INFO     | handlers.gemini_handler:process_text:71 - Successfully processed text input
+2025-06-21 22:43:16 | ERROR    | utils.basic_tech_api:_make_request:45 - Error making request to Basic Tech API: 404 Client Error: Not Found for url: https://api.basic.tech/project/c93871ce-bd0a-4678-bc21-00ed989c8c65/user/did:tmp:6673b487aa82727924a89f44/data
+2025-06-21 22:43:17 | ERROR    | utils.basic_tech_api:_make_request:45 - Error making request to Basic Tech API: 404 Client Error: Not Found for url: https://api.basic.tech/project/c93871ce-bd0a-4678-bc21-00ed989c8c65/user/did:tmp:6673b487aa82727924a89f44/data
+2025-06-21 22:44:19 | INFO     | core.script_runner:save_script_to_file:96 - Script saved to C:\Users\PC\AppData\Local\Temp\fixer_ai\repair_script_1750542259.bat
+2025-06-21 22:44:19 | INFO     | core.script_runner:run_script:147 - Executing script: C:\Users\PC\AppData\Local\Temp\fixer_ai\repair_script_1750542259.bat
+2025-06-21 22:44:20 | INFO     | core.script_runner:run_script:176 - Script executed successfully
+2025-06-21 22:44:56 | INFO     | handlers.gemini_handler:init_gemini:30 - Gemini API initialized successfully
+2025-06-21 22:45:09 | INFO     | utils.logger:setup_logger:69 - Logger initialized with level INFO, logging to logs/fixer_ai.log
+2025-06-21 22:45:13 | INFO     | utils.logger:setup_logger:69 - Logger initialized with level INFO, logging to logs/fixer_ai.log
+2025-06-21 22:45:13 | INFO     | __main__:main:53 - Starting Fixer AI Repair Agent
+2025-06-21 22:45:13 | INFO     | __main__:main:61 - Starting in CLI mode
+2025-06-21 22:45:14 | ERROR    | utils.basic_tech_api:_make_request:45 - Error making request to Basic Tech API: 404 Client Error: Not Found for url: https://api.basic.tech/project/c93871ce-bd0a-4678-bc21-00ed989c8c65/user/did:tmp:6673b487aa82727924a89f44/data
+2025-06-21 22:48:59 | INFO     | utils.logger:setup_logger:69 - Logger initialized with level INFO, logging to logs/fixer_ai.log
+2025-06-21 22:49:03 | INFO     | utils.logger:setup_logger:69 - Logger initialized with level INFO, logging to logs/fixer_ai.log
+2025-06-21 22:49:03 | INFO     | __main__:main:53 - Starting Fixer AI Repair Agent
+2025-06-21 22:49:03 | INFO     | __main__:main:61 - Starting in CLI mode
+2025-06-21 22:49:04 | ERROR    | utils.basic_tech_api:_make_request:45 - Error making request to Basic Tech API: 404 Client Error: Not Found for url: https://api.basic.tech/api/v1/data/user/did:tmp:6673b487aa82727924a89f44
+2025-06-21 22:49:04 | ERROR    | handlers.cli_handler:run:270 - Error in CLI interface: argument of type 'NoneType' is not iterable
+2025-06-21 22:57:47 | INFO     | utils.logger:setup_logger:69 - Logger initialized with level INFO, logging to logs/fixer_ai.log
+2025-06-21 22:57:51 | INFO     | utils.logger:setup_logger:69 - Logger initialized with level INFO, logging to logs/fixer_ai.log
+2025-06-21 22:57:51 | INFO     | __main__:main:53 - Starting Fixer AI Repair Agent
+2025-06-21 22:57:51 | INFO     | __main__:main:61 - Starting in CLI mode
+2025-06-21 22:57:52 | ERROR    | utils.basic_tech_api:_make_request:47 - Error making request to Basic Tech API: 500 Server Error: Internal Server Error for url: https://api.basic.tech/project/c93871ce-bd0a-4678-bc21-00ed989c8c65/user/did:tmp:6673b487aa82727924a89f44/db/user_context
+2025-06-21 22:57:52 | INFO     | utils.basic_tech_api:get_user_context:64 - No user context found for user did:tmp:6673b487aa82727924a89f44 or table doesn't exist.

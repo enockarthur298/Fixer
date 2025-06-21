@@ -137,7 +137,8 @@ def run() -> None:
         if user_context:
             console.print(f"[bold green]Loaded user context with {len(user_context.get('interactions', []))} previous interactions.[/bold green]")
         else:
-            console.print(f"[bold yellow]No user context loaded. API key may not be set.[/bold yellow]")
+            console.print(f"[bold yellow]No user context loaded. Basic Tech may not be properly configured.[/bold yellow]")
+            console.print(f"[dim]Continuing without personalized context...[/dim]")
             user_context = {}
         
         # Main interaction loop
@@ -162,11 +163,12 @@ def run() -> None:
                 if result.get("script"):
                     last_script = result["script"]
                 # Save interaction to user context
-                basic_tech_client.add_interaction_to_context(user_id, {
-                    'timestamp': time.time(),
-                    'request': description,
-                    'response': result
-                })
+                if basic_tech_client.api_key and basic_tech_client.project_id:
+                    basic_tech_client.add_interaction_to_context(user_id, {
+                        'timestamp': time.time(),
+                        'request': description,
+                        'response': result
+                    })
             
             elif user_input.lower() == "!webcam":
                 # Capture and analyze webcam image
@@ -180,11 +182,12 @@ def run() -> None:
                 if result.get("script"):
                     last_script = result["script"]
                 # Save interaction to user context
-                basic_tech_client.add_interaction_to_context(user_id, {
-                    'timestamp': time.time(),
-                    'request': description,
-                    'response': result
-                })
+                if basic_tech_client.api_key and basic_tech_client.project_id:
+                    basic_tech_client.add_interaction_to_context(user_id, {
+                        'timestamp': time.time(),
+                        'request': description,
+                        'response': result
+                    })
             
             elif user_input.lower() == "!run":
                 # Execute the last script
@@ -246,23 +249,18 @@ def run() -> None:
                         if user_context:
                             user_input = f"Previous context: {json.dumps(user_context)}\nCurrent request: {user_input}"
                         result = process_command(user_input)
-                else:
-                    # Process normal text input without image prompt
-                    # Add context to the request
-                    if user_context:
-                        user_input = f"Previous context: {json.dumps(user_context)}\nCurrent request: {user_input}"
-                    result = process_command(user_input)
                 
                 # Display result and store script
                 display_result(result)
                 if result.get("script"):
                     last_script = result["script"]
                 # Save interaction to user context
-                basic_tech_client.add_interaction_to_context(user_id, {
-                    'timestamp': time.time(),
-                    'request': user_input,
-                    'response': result
-                })
+                if basic_tech_client.api_key and basic_tech_client.project_id:
+                    basic_tech_client.add_interaction_to_context(user_id, {
+                        'timestamp': time.time(),
+                        'request': user_input,
+                        'response': result
+                    })
     
     except KeyboardInterrupt:
         console.print("\n[bold blue]CLI interface terminated.[/bold blue]")
